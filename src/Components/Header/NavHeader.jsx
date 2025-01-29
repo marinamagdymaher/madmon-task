@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { NavLink } from "react-router-dom";
-import { faHeart } from "@fortawesome/free-solid-svg-icons";
+import { faHeart ,faGlobe} from "@fortawesome/free-solid-svg-icons";
 
 export default function NavHeader({closeMenu}) {
   const links = [
@@ -13,6 +13,12 @@ export default function NavHeader({closeMenu}) {
       icon: faHeart,
       color: "text-blue-500",
     },
+    // {
+    //   to: "/favorite",
+    //   title: "EN",
+    //   icon: faGlobe,
+    //   color: "text-blue-500",
+    // },
   ];
 
   return (

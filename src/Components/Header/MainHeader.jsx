@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import Logo from "../Logo";
 import UserDropDwn from "./UserDropDwn";
 import NavHeader from "./NavHeader";
+import English from "./English";
+
 
 export default function MainHeader() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,8 +62,9 @@ export default function MainHeader() {
               isMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
             } lg:block lg:opacity-100 lg:max-h-none  mt-3 lg:mt-0`}
           >
-            <div className="flex flex-col md:flex-row gap-3">
+            <div className="flex flex-col items-center md:flex-row gap-3">
               <NavHeader closeMenu={closeMenu} />
+              <English/>
               <UserDropDwn />
             </div>
           </nav>
