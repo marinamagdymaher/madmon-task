@@ -4,26 +4,31 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { formatDate, formattedPrice, getStatusColor } from "../Utils/Utils";
 // import { useDeleteUnit } from "../api/DeleteUnit";
 
-export default function Cards({ item }) {
-  const createdPrice = formattedPrice(item?.price);
-  const createdDate = formatDate(item?.createdAt);
-  const status = item?.status;
-  console.log(status);
+export default function Cards({ item, handleDelete }) {
+  const {
+    id,
+    name,
+    coverUrl,
+    price,
+    address,
+    createdAt,
+    space,
+    status,
+    bedroomsNumber,
+    bathroomsNumber,
+  } = item;
+  const createdPrice = formattedPrice(price);
+  const createdDate = formatDate(createdAt);
   const bgColor = getStatusColor(status);
   const isSold = status === "sold";
   const cardOpacity = isSold ? "opacity-50" : "opacity-100";
-
-  // const { mutate: deleteUnit } = useDeleteUnit();
-  // const handleDelete = (id) => {
-  //   deleteUnit(id);
-  // };
   return (
     <div
       className={`bg-grey-50 ${cardOpacity} flex flex-col md:flex-row gap-5 rounded shadow-md mb-4`}
     >
       <div className="w-full md:w-1/3 ">
         <img
-          src={item.coverUrl}
+          src={coverUrl}
           alt="Property overview"
           // h-dvh
           className="w-full h-full object-cover rounded-l"
@@ -31,34 +36,34 @@ export default function Cards({ item }) {
       </div>
       <div className="flex-1 py-5 px-3">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-3">
-          <h3 className="text-2xl font-bold">{item.name}</h3>
+          <h3 className="text-2xl font-bold">{name}</h3>
           {status && (
             <p className={`${bgColor} text-white rounded px-2 py-1`}>
               {status}
             </p>
           )}
 
-          <p className="text-red-500 font-bold text-3xl">{createdPrice} EGP</p>
+          <p className="text-red-500 font-bold text-xl">{createdPrice} EGP</p>
         </div>
-        <h4 className="font-semibold mb-2">{item.address}</h4>
+        <h4 className="font-semibold mb-2">{address}</h4>
         <div className="flex gap-4 mb-4">
           <div className="flex items-center gap-2">
             <div className="border border-blue-500 p-2 rounded">
               <img src="/room.png" alt="Room icon" className="rouneded-l" />
             </div>
-            <h5>{item.bedroomsNumber}</h5>
+            <h5>{bedroomsNumber}</h5>
           </div>
           <div className="flex items-center gap-2">
             <div className="border border-blue-500 p-2 rounded">
               <img src="/bath.png" alt="Bathroom icon" />
             </div>
-            <h5>{item.bathroomsNumber}</h5>
+            <h5>{bathroomsNumber}</h5>
           </div>
           <div className="flex items-center gap-2">
             <div className="border border-blue-500 p-2 rounded">
               <img src="/square.png" alt="Square footage icon" />
             </div>
-            <h5>{item.space}</h5>
+            <h5>{space}</h5>
           </div>
         </div>
         <div className="flex justify-between items-center">
@@ -74,6 +79,7 @@ export default function Cards({ item }) {
         </div>
       </div>
       <button
+        onClick={() => handleDelete(id)}
         className="bg-red-500 hover:text-red-700 text-white p-5 opacity-50 rounded-r"
       >
         <FontAwesomeIcon icon={faTrash} className="text-xl" />

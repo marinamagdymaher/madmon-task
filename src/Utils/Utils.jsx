@@ -1,6 +1,6 @@
 export const formattedPrice = (price) => {
-  const newPrice = price / 1000;
-  return newPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  // const newPrice = price / 1000;
+  return price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 };
 
 export function formatDate(dateString) {
@@ -20,3 +20,6 @@ export const getStatusColor = (status) => {
   if (status === "sold") return "bg-grey-400";
   return "bg-gray-200"; // Default background color
 };
+
+
+

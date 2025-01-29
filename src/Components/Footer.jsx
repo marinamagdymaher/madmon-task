@@ -19,8 +19,8 @@ function TopFooter() {
   return (
     <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 items-center gap-6 p-5">
       {/* Logo Section */}
-      <div className="xs:w-64 md:border-r border-yellow">
-        <Logo colorChange="inset-0" />
+      <div className="flex items-center justify-center h-full md:border-r border-yellow">
+        <Logo colorChange="inset-0" width="w-40"/>
       </div>
       {/* Quick Links Section */}
       <ul className="md:border-r border-yellow">
@@ -49,7 +49,7 @@ function TopFooter() {
 
 function SocialMedia() {
   return (
-    <div className="flex items-center md:justify-between  py-5 gap-3 md:gap-6">
+    <div className="flex items-center md:justify-around py-5 gap-3 md:gap-6">
       <a
         href="https://linkedin.com"
         target="_blank"

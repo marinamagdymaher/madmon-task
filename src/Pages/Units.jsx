@@ -1,36 +1,46 @@
+import { useEffect, useState } from "react";
 import Button from "../Components/Button";
 import Cards from "../Components/Cards";
-import { useUnitsStore } from "../zuztand/useUnitsStore";
-import { useFetchUnits } from "../api/FetchUnits";
+import { useDeleteUnit, useFetchUnits } from "../api/units";
+
+import Filter from "../Components/Filter";
 
 export default function Units() {
-  const units = useUnitsStore((state) => state.units);
-  console.log(units);
-  const { data } = useFetchUnits();
+  const { data: units } = useFetchUnits();
+  const { mutate: removeUnit } = useDeleteUnit();
+  const [sortedData, setSortedData] = useState([]);
+  console.log(sortedData);
+  useEffect(() => {
+    if (units) {
+      setSortedData([...units]); // Set initial data
+    }
+  }, [units]);
+
+  // Handle Delete
+  const handleDelete = (id) => {
+    console.log(id);
+    if (window.confirm("Are you sure you want to delete this unit?")) {
+      removeUnit(id);
+      console.log("removeUnit", id);
+    }
+  };
+
   return (
     <div className="text-left">
       <div className="flex flex-col md:flex-row justify-between items-center">
         <h5 className="text-3xl font-semibold pb-5">My Units</h5>
         <div className="flex items-center">
           <div className="flex p-2">
-            <button>
-              <img
-                src="filter icon.png"
-                alt="filter icon.png"
-                className="mx-2"
-              />
-            </button>
-            <button>
-              <img src="Frame 49191.png" alt="Frame 49191.png" />
-            </button>
+            {/* Tooltip Wrapper */}
+            <Filter setSortedData={setSortedData} units={units} />
           </div>
           <Button buttonTitle="+ Add Units" colorBgButton="bg-blue-500" />
         </div>
       </div>
       {/* Render Cards */}
       <div>
-        {data?.map((item) => (
-          <Cards key={item.id} item={item} />
+        {sortedData?.map((item) => (
+          <Cards key={item.id} item={item} handleDelete={handleDelete} />
         ))}
       </div>
     </div>
